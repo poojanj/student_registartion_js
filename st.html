@@ -11,27 +11,28 @@
 			<table >	
 		<tr>
 			<td> Name : </td>
-			<td>  <input type="text" name="name" id="name"/> </td>
+			<td>  <input type="text" name="name" id="name" onkeypress="return alpha(event)"/> </td>
 		</tr>
 		<tr>
 			<td> Usn : </td> 
-			<td> <input type="text" name="usn" id="usn"/>  </td>
+			<td> <input type="text" name="usn" id="usn" onkeypress="javascript:return isNumber(event)" />  </td>
 		</tr>
 		<tr>
 			<td>YoJ : </td>
-			<td> <input type="text" name="yoj" id="yoj"/>  </td>		
+			<td> <input type="text" name="yoj" id="yoj" onblur="yearValidation(this.value,event)" onkeypress="yearValidation(this.value,event)"/>  </td>		
 		</tr>
 		<tr>
 			<td> Dept : </td>
-			<td> <input type="text" name="dept" id="dept"/>  </td>
+			<td> <input type="text" name="dept" id="dept" onkeypress="return alpha(event)"/>  </td>
 		</tr>
 		<tr>
 			<td>College : </td>
-			<td> <input type="text" name="college" id="college"/>  </td>
+			<td> <input type="text" name="college" id="college" onkeypress="return alpha(event)"/>  </td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"> <input type="button" value="Submit" onclick="add()"/>  
+			<td colspan="3" align="center"> 
 				 <input type="button" value="Reset" onclick="reset()"/>  
+<input type="button" value="submit" onclick="validate()"/>  </td>
 			
 		</tr>
 		</table>
@@ -40,44 +41,7 @@
 
 			<h1 align="center"> Diplaying Student Details </h1>
 		<center>
-<!--<table border="1" id="list">
-<tr> 
-	<td>
-		Name
-	</td>
-	<td>
-		Usn
-	</td>
-	<td>
-		YoJ
-	</td>
-
-	<td>
-		Dept
-	</td>
-
-	<td>
-		College
-	</td>
-</tr>
-<tr>
-	<td>
-		 <span id='name1'></span>
-	</td>
-	<td>
-		 <span id='usn1'></span>
-	</td>
-	<td>
-		 <span id='yoj1'></span>
-	</td>
-	<td>
-		 <span id='dept1'></span>
-	</td>
-	<td>
-		 <span id='college1'></span>
-	</td>
-</tr>-->
-<table id = "list" cellspacing = "0px" cellpadding = "20px" text-align = "center">
+		<table id = "list" cellspacing = "0px" cellpadding = "20px" text-align = "center">
             <thead>
                 <tr>
                     <td>Name</td>
@@ -88,9 +52,8 @@
 			<td>Action</td>
                 </tr>
             </thead>
-
-            
-        </table>	</center>
+       </table>
+	</center>
 	</body>
 </html>
 			
