@@ -1,0 +1,185 @@
+<html>
+	<title> STUDENT REGISTRATION </title>
+	<head>
+<script  src="jqry.js">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+window.regForm = window.regForm || {};
+
+//Validating for Name,Dept,College only alphabets allowed 
+regForm.uname=(function() {
+$("#uname").keypress(function(event){
+     var k;
+     document.all ? k = event.keyCode : k = event.which;
+     return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8);
+});
+});
+regForm.uname();
+
+regForm.department=(function() {
+$("#dept").keypress(function(event) {
+     var k;
+     document.all ? k = event.keyCode : k = event.which;
+     return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8);
+});
+});
+regForm.department();
+
+regForm.colleg=(function() {
+$("#college").keypress(function(event) {
+     var k;
+     document.all ? k = event.keyCode : k = event.which;
+     return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8);
+});
+});
+regForm.colleg();
+//Validating for USN only numerics allowed
+regForm.usn=(function() {
+$("#usn").keypress(function(event) {
+var iKeyCode = (event.which) ? event.which : event.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+        return true;
+});
+});
+regForm.usn();
+//Validating for YoJ only numerics allowed max length 4 from 1920 to current year
+regForm.yoj=(function() {
+$("#yoj").keypress(function(event) {
+var year = $("#yoj").val();
+var text = /^[0-9]+$/;
+  if(event.type=="blur" || year.length==4 && event.keyCode!=8 && event.keyCode!=46) {
+    if (year != 0) {
+        if ((year != "") && (!text.test(year))) {
+            alert("Please Enter Numeric Values Only");
+            return false;
+        }
+        if (year.length != 4) {
+            alert("Year is not proper. Please check");
+            return false;
+        }
+        var current_year=new Date().getFullYear();
+        if((year < 1920) || (year > current_year))
+            {
+            alert("Year should be in range 1920 to current year");
+            return false;
+            }
+        return true;
+    } }
+});
+});
+regForm.yoj();
+//validate and add methods
+regForm.add=(function() {
+$("#sub").click(function() {
+if (validation()) // Calling validation function
+{
+$("#person").submit(); //form submission
+alert(" Form Submitted Successfully......");
+}
+});
+});
+regForm.add();
+
+//Reset method
+regForm.reset=(function() {
+$("#re").click(function() {
+$('#person').trigger("reset");
+});
+});
+regForm.reset();
+//Delete method
+regForm.d=(function() {
+$(".det").click(function(event) {
+//console.log(event.currentTarget.closest('tr'));
+ event.currentTarget.closest('tr').remove();
+});
+});
+
+// Validating form fields empty or not
+function validation() {
+var name = $("#name").val();
+var usn = $("#usn").val();
+var yoj = $("#yoj").val();
+var dept = $("#dept").val();
+var college = $("#college").val();
+if( name ==='' || usn==='' || yoj==='' || dept==='' || college==='' ){
+alert("Please fill fields...!!!!!!");
+return false;
+}else{
+alert(" Form Validated Successfully......");
+	return added();
+}
+}
+//Js code to add student data and display on the same web page
+function added() {
+	var rows = "";
+        var name = $("#uname").val();
+	var usn = $("#usn").val();
+	var yoj = $("#yoj").val();
+	var dept = $("#dept").val();
+	var college = $("#college").val();
+	rows += "<td>" + name + "</td><td>" + usn + "</td><td>" + yoj + "</td><td>" + dept + "</td><td>" + college + "</td><td>" + "<input type='button' value='Delete' id='del' class='det' />" + "</td>";
+        var tbody = document.querySelector("#list");
+        var tr = document.createElement("tr");
+        tr.innerHTML = rows;
+        tbody.appendChild(tr);
+	regForm.d();
+    }
+});
+</script>
+</head>
+	<body>
+			<h1 align="center"> STUDENT REGISTRATION FORM </h1>
+		<form id="person" name="registration" class="form_class">
+		<center> 
+			<table >	
+		<tr>
+			<td> Name : </td>
+			<td>  <input type="text" name="uname" id="uname" /> </td>
+		</tr>
+		<tr>
+			<td> Usn : </td> 
+			<td> <input type="text" name="usn" id="usn"  />  </td>
+		</tr>
+		<tr>
+			<td>YoJ : </td>
+			<td> <input type="text" name="yoj" id="yoj" />  </td>		
+		</tr>
+		<tr>
+			<td> Dept : </td>
+			<td> <input type="text" name="dept" id="dept" />  </td>
+		</tr>
+		<tr>
+			<td>College : </td>
+			<td> <input type="text" name="college" id="college" />  </td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center"> 
+				 <input type="button" value="Reset" id="re" />  
+				<input type="button" value="submit" id="sub" />  </td>
+		</tr>
+		</table>
+	</center>
+		</form>
+			<h1 align="center"> Diplaying Student Details </h1>
+		<center>
+		<table class="actionsteps-list" id = "list">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Usn</td>
+                    <td>YoJ</td>
+                    <td>Dept</td>
+                    <td>College</td>
+			<td>Action</td>
+                </tr>
+            </thead>
+       </table>
+	</center>
+	</body>
+</html>
+			
+			
+			
